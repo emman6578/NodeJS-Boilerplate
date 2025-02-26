@@ -1,15 +1,19 @@
 import { successHandler } from "@utils/SuccessHandler";
 import { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const user = asyncHandler(async (req: Request, res: Response) => {
-  // Simulate resource lookup
-  const resourceFound = false; // change as needed
+  const userData = await prisma.user.findFirst({});
+
+  // Simulate error
+  const resourceFound = true; // change as needed
 
   if (!resourceFound) {
     throw new Error("Resource not found!");
   }
 
-  const userData = { id: 1, name: "John Doe" };
-  successHandler(userData, res, "GET", "User Date Successfully Retrieved");
+  successHandler(userData, res, "GET", "User Data Successfully Retrieved");
 });

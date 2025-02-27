@@ -41,7 +41,7 @@ Follow the steps below to set up and run the API locally.
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
 - A database (e.g., PostgreSQL, MySQL, or a NoSQL option)
 
-### Installation
+## Installation
 
 1. **Clone the Repository:**
 
@@ -77,5 +77,43 @@ Follow the steps below to set up and run the API locally.
 5. **Run the Program:**
 
    ```bash
+    npm run build
     npm run dev
    ```
+
+## Configuration
+
+All settings are managed via environment variables. Refer to the sample .env file for a complete list of configurable options.
+
+### Authentication
+
+This API uses JSON Web Tokens (JWT) for authentication and email one time password OTP.
+
+- **Base URL (Register):** http://localhost:3001/api/v1/auth/register
+- **Method:** POST
+  ```bash
+  {
+      "fullname":"Name here",
+      "email":"yourEmail@gmail.com",
+      "password":"yourpassowrd",
+      "role":"" //Only accepts (ADMIN,MANAGER,USER)
+  }
+  ```
+- **Base URL (Login):** http://localhost:3001/api/v1/auth/login
+- **Method:** POST
+  ```bash
+  {
+      "email":"yourEmail@gmail.com",
+      "password":"yourPassword"
+  }
+  ```
+- **Base URL (Authenticate):** http://localhost:3001/api/v1/auth/code
+- **Method:** POST
+  ```bash
+  {
+     "email":"youremail@gmail.com",
+     "emailToken":"code from email"
+  }
+  ```
+
+## API Endpoints

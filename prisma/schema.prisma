@@ -14,6 +14,53 @@ datasource db {
 }
 
 model User {
-  id   String @id @default(uuid())
-  name String
+  id String @id @default(uuid())
+
+  auth     Auth?
+  fullname String
+  role     Role?
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  Token Token[]
+}
+
+model Auth {
+  id String @id @default(uuid())
+
+  email    String @unique
+  password String @unique
+
+  User    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String @unique
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}
+
+model Token {
+  id String @id @default(uuid())
+
+  type       Type     @default(EMAIL) // EMAIL || API
+  emailToken String?  @unique
+  valid      Boolean  @default(true)
+  expiration DateTime
+
+  User    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}
+
+enum Type {
+  EMAIL
+  API
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  USER
 }

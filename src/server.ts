@@ -4,11 +4,12 @@ import cors from "cors";
 import helmet from "helmet";
 
 //Routes Imports
+import AuthRoutes from "@routes/auth.routes";
 import UserRoutes from "@routes/user.routes";
 
 //Error Handler
-import { errorHandler, notFound } from "@utils/ErrorHandler";
-import { successHandler } from "@utils/SuccessHandler";
+import { errorHandler, notFound } from "@utils/ErrorHandler/ErrorHandler";
+import { successHandler } from "@utils/SuccessHandler/SuccessHandler";
 
 //env config
 dotenv.config();
@@ -23,7 +24,8 @@ server.use(helmet());
 server.use(cors());
 
 //routes import
-server.use("/api/v1/", UserRoutes);
+server.use("/api/v1/auth", AuthRoutes);
+server.use("/api/v1/users", UserRoutes);
 
 //Welcome Route Info about this codebase
 server.get("/", (req: Request, res: Response) => {

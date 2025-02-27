@@ -12,8 +12,6 @@ A robust RESTful API boilerplate to start up developing this includes Role Based
 - [Authentication](#authentication)
 - [API Endpoints](#api-endpoints)
   - [Users](#users)
-  - [Products](#products)
-  - [Orders](#orders)
 - [Error Handling](#error-handling)
 - [Rate Limiting](#rate-limiting)
 - [Testing](#testing)
@@ -70,7 +68,13 @@ Follow the steps below to set up and run the API locally.
     MP= (generated password here)
    ```
 
-4. **Run the Program:**
+4. **Database Set up:**
+
+   ```bash
+    npx prisma migrate dev --name init
+   ```
+
+5. **Run the Program:**
 
    ```bash
     npm run dev
